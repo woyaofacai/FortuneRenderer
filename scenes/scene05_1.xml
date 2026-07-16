@@ -1,0 +1,49 @@
+<Scene>
+	<Camera>
+		<Position>0, 0, 0</Position>
+		<Target>0, 0, 1</Target>
+		<Up>0, 1, 0</Up>
+		<NearZ>0.1</NearZ>
+		<FarZ>1000</FarZ>
+		<Fov>60</Fov>
+	</Camera>
+
+	<SceneObjects>
+		<!-- Rect -->
+		<SceneObject>
+			<Transform>
+				<Position>0, 0, 5</Position>
+				<Rotation>0, 0, 0</Rotation>
+				<Scale>2.0</Scale>
+			</Transform>
+			<Primitives>
+				<Triangle>
+					<Vertex>-1, -1, 0</Vertex>
+					<Vertex>1, -1, 0</Vertex>
+					<Vertex>1, 1, 0</Vertex>
+				</Triangle>
+				<Triangle>
+					<Vertex>-1, -1, 0</Vertex>
+					<Vertex>1, 1, 0</Vertex>
+					<Vertex>-1, 1, 0</Vertex>
+				</Triangle>
+			</Primitives>
+		</SceneObject>
+
+		<!-- Sphere -->
+		<SceneObject>
+			<Transform>
+				<Position>0, 0, 2</Position>
+				<Rotation>0, 0, 0</Rotation>
+				<Scale>1.0</Scale>
+			</Transform>
+			<Primitives>
+				<Sphere>
+					<Radius>0.5</Radius>
+				</Sphere>
+			</Primitives>
+		</SceneObject>
+	</SceneObjects>
+
+</Scene>
+

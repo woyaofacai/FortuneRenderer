@@ -1,0 +1,7 @@
+/build
+/resources/_Generated_/*
+*.bak
+/.vscode
+/.idea
+/cmake-build-debug
+
