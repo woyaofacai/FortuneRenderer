@@ -5,9 +5,11 @@
 #include <thread>
 #include <vector>
 
-Renderer::Renderer(int w, int h, int samplePerPixel, const char* filepath)
+Renderer::Renderer(int w, int h, int minDepth, int maxDepth, int samplePerPixel, const char* filepath)
 	: mViewportWidth(w)
-	, mViewportHeight(h)
+    , mViewportHeight(h)
+	, mMinDepth(minDepth)
+    , mMaxDepth(maxDepth)
 	, SamplePerPixel(samplePerPixel)
 {
 	mCurrentPixelIndex = 0;
@@ -77,7 +79,7 @@ Color Renderer::RenderPixel(int x, int y)
 Color Renderer::RenderSubPixel(float x, float y)
 {
 	Ray ray = mScene->GetCamera().GetRay(x, y);
-	Color color = GetRadiance(ray);
+	Color color = GetRadiance(ray, 0);
 	return color;
 }
 
@@ -113,8 +115,24 @@ Color Renderer::GetIrradiance(const Ray& ray)
 	return E;
 }
 
-Color Renderer::GetRadiance(const Ray& ray)
+Color Renderer::GetRadiance(const Ray& ray, int depth)
 {
+	if (depth > mMaxDepth)
+		return Color(0, 0, 0);
+
+	// 俄罗斯轮盘
+	static const float SurvivalProbability = 0.8f;
+	float RewardFactor = 1.0f;
+	if (depth >= mMinDepth)
+	{
+		float K = Random01();
+		if (K > SurvivalProbability)
+		{
+			return Color(0, 0, 0);
+		}
+		RewardFactor = 1.0f / SurvivalProbability;
+	}
+
 	Intersection isect;
 	SceneObject* pSceneObject = mScene->Intersect(ray, isect);
 	if (pSceneObject == nullptr)
@@ -128,29 +146,63 @@ Color Renderer::GetRadiance(const Ray& ray)
 
 	Vector3f wo = worldToLocal * (-ray.d); // 出射方向，转换到局部坐标系
 
-	for (Light* pLight : mScene->GetLights())
+	// 直接光照：
+	if (!pMaterial->IsSpecular())
 	{
-		Vector3f sourcePos;
-		Color L = pLight->GetRadiance(isect.position, sourcePos);
+		for (Light* pLight : mScene->GetLights())
+		{
+			Vector3f sourcePos;
+			Color L = pLight->GetRadiance(isect.position, sourcePos);
 
-		// 求shadowRay
-		Ray shadowRay;
-		shadowRay.o = isect.position;
-		shadowRay.d = glm::normalize(sourcePos - isect.position);
-		shadowRay.mint = 1e-3f;
-		shadowRay.maxt = glm::length(sourcePos - isect.position);
+			// 求shadowRay
+			Ray shadowRay;
+			shadowRay.o = isect.position;
+			shadowRay.d = glm::normalize(sourcePos - isect.position);
+			shadowRay.mint = 1e-3f;
+			shadowRay.maxt = glm::length(sourcePos - isect.position);
 
-		Intersection shadow_isect;
-		if (mScene->Intersect(shadowRay, shadow_isect)) // 如果shadowRay与场景中的物体相交，说明该点被遮挡了
-			continue;
+			Intersection shadow_isect;
+			if (mScene->Intersect(shadowRay, shadow_isect)) // 如果shadowRay与场景中的物体相交，说明该点被遮挡了
+				continue;
 
-		Vector3f wi = worldToLocal * shadowRay.d; // 入射方向，转换到局部坐标系
-		float cosTheta = glm::dot(isect.normal, shadowRay.d);
-		Color brdf = pMaterial->BRDF(wo, wi);
-		Lo += brdf * L * glm::max(cosTheta, 0.0f);
+			Vector3f wi = worldToLocal * shadowRay.d; // 入射方向，转换到局部坐标系
+			float cosTheta = glm::dot(isect.normal, shadowRay.d);
+			Color brdf = pMaterial->BRDF(wo, wi);
+			Lo += brdf * L * glm::max(cosTheta, 0.0f);
+		}
 	}
 
-	return Lo;
+	// 间接光照：
+	
+	// 反射：
+	{
+		float pdf;
+		Vector3f wi = pMaterial->SampleWi(wo, pdf);
+		Color brdf = pMaterial->BRDF(wo, wi);
+		Ray r;
+		r.d = localToWorld * wi;
+		r.o = isect.position;
+		r.mint = 1e-3f;
+		Color Li = GetRadiance(r, depth + 1);
+		Lo += brdf * Li * wi.z / std::max(1e-5f, pdf);
+	}
+	
+	// 折射：
+	Vector3f wt;
+	if (pMaterial->SampleWt(wo, wt))
+	{
+		Color btdf = pMaterial->BTDF(wo, wt);
+		Ray r;
+		r.d = localToWorld * wt;
+		r.o = isect.position;
+		r.mint = 1e-3f;
+
+		// todo:
+		Color Li = GetRadiance(r, depth + 1);
+		Lo += btdf * Li * std::fabs(wt.z);
+	}
+
+	return Lo * RewardFactor;
 }
 
 // 渲染线程的入口函数，负责执行渲染循环

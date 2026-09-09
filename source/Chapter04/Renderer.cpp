@@ -39,7 +39,7 @@ void Renderer::Run()
 	std::thread renderThread(&Renderer::RunRenderThread, this);
 	renderThread.detach();
 
-	int numThreads = std::thread::hardware_concurrency() - 8;
+	int numThreads = std::thread::hardware_concurrency();
 	std::vector<std::thread> renderThreads(numThreads);
 	for (int i = 0; i < numThreads; i++) 
 	{

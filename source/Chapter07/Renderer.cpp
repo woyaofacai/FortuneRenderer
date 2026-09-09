@@ -11,35 +11,6 @@ Renderer::Renderer(int w, int h, int samplePerPixel, const char* filepath)
 {
 	mCurrentPixelIndex = 0;
 	mScene = Scene::LoadSceneFromXML(filepath, w, h);
-
-	//mScene->CreateLight<DirectionalLight>(Vector3f(-1, -1, -1), Color(1.0f, 0, 0));
-	//mScene->CreateLight<PointLight>(Vector3f(0, 5, 0), Color(0, 1.0f, 0), Vector3f(1.0f, 0.0f, 0.0f));
-	
-	//mScene = new Scene();
-
-	//// 设置摄像机
-	//Camera camera;
-	//camera.Initialize(
-	//	Vector3f(0, 0, 0), // 相机位置
-	//	Vector3f(0, 0, 1), // 目标位置
-	//	Vector3f(0.0f, 1.0f, 0.0f), // 上向量
-	//	glm::radians(60.0f), // FOV
-	//	0.1f, // 近裁剪面
-	//	1000.0f, // 远裁剪面
-	//	w, h // 视口宽高
-	//);
-	//mScene->SetCamera(camera);
-
-	//// 给场景添加物体：
-
-	//SceneObject* pSceneObject = mScene->CreateSceneObject(Vector3f(0, 0, 5), Vector3f(0, 0, 0), 2.0f);
-	//pSceneObject->CreatePrimitive<Triangle>(Vector3f(-1, -1, 0), Vector3f(1, -1, 0), Vector3f(1, 1, 0));
-	//pSceneObject->CreatePrimitive<Triangle>(Vector3f(-1, -1, 0), Vector3f(1, 1, 0), Vector3f(-1, 1, 0));
-
-	//SceneObject* pSceneObject2 = mScene->CreateSceneObject(Vector3f(0, 0, 2), Vector3f(0, 0, 0), 1.0f);
-	//pSceneObject2->CreatePrimitive<Sphere>(0.5f);
-
-
 }
 
 Renderer::~Renderer()
@@ -60,7 +31,7 @@ void Renderer::Run()
 	std::thread renderThread(&Renderer::RunRenderThread, this);
 	renderThread.detach();
 
-	int numThreads = std::thread::hardware_concurrency() - 8;
+	int numThreads = std::thread::hardware_concurrency();
 	std::vector<std::thread> renderThreads(numThreads);
 	for (int i = 0; i < numThreads; i++) 
 	{
