@@ -1,0 +1,69 @@
+<Scene>
+	<Camera>
+		<Position>0, 0, -3</Position>
+		<Target>0, 0, 0</Target>
+		<Up>0, 1, 0</Up>
+		<NearZ>0.1</NearZ>
+		<FarZ>1000</FarZ>
+		<Fov>45</Fov>
+	</Camera>
+	
+	<Materials>
+        <Material>
+            <Name>M_Lambert_Gray</Name>
+            <Type>Lambert</Type>
+            <Albedo>0.8, 0.8, 0.8</Albedo>
+        </Material>
+    </Materials>
+
+	<SceneObjects>
+        <!-- back wall -->
+		<SceneObject>
+			<Transform>
+				<Position>0, 0, 0</Position>
+				<Rotation>0, 0, 0</Rotation>
+				<Scale>1</Scale>
+			</Transform>
+			<Material>M_Lambert_Gray</Material>
+			<!--
+			<Primitives>
+				<Triangle>
+					<Vertex>0, 1, 0, 0.5, 0</Vertex>
+					<Vertex>1, -1, 0, 1.0, 1.0</Vertex>
+					<Vertex>-1, -1, 0, 1.0</Vertex>
+				</Triangle>
+			</Primitives>
+			-->
+
+			
+			<Primitives>
+				<Triangle>
+					<Vertex>-1, 1, 0, 0, 0</Vertex>
+					<Vertex>1, 1, 0, 1, 0</Vertex>
+					<Vertex>-1, -1, 0, 0, 1</Vertex>
+				</Triangle>
+				<Triangle>
+					<Vertex>1, 1, 0, 1, 0</Vertex>
+					<Vertex>1, -1, 0, 1, 1</Vertex>
+					<Vertex>-1, -1, 0, 0, 1</Vertex>
+				</Triangle>
+			</Primitives>
+
+			<!--
+			<Primitives>
+				<Sphere>
+					<Radius>1</Radius>
+				</Sphere>
+			</Primitives>
+			-->
+			
+			<!--<Primitives>
+				<Disk>
+					<Radius>1</Radius>
+				</Disk>
+			</Primitives>-->
+			
+		</SceneObject>
+	</SceneObjects>
+</Scene>
+

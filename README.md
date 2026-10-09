@@ -80,12 +80,14 @@ sudo apt install -y \
 - <a href="https://www.bilibili.com/video/BV1SANt6kEb4/" target="_blank" rel="noopener noreferrer">第 9 章（下）：蒙特卡洛积分与采样（下）</a>
 - <a href="https://www.bilibili.com/video/BV1LZK56HEMR/" target="_blank" rel="noopener noreferrer">第 10 章 ：镜面材质</a>
 - <a href="https://www.bilibili.com/video/BV1P23K6xEUU/" target="_blank" rel="noopener noreferrer">第 11 章 ：折射与BTDF</a>
-- <a href="https://www.bilibili.com/video/BV1ksGu6cE7Z/" target="_blank" rel="noopener noreferrer">第 12 章  (上) ：概率论与采样算法（上）</a>
-- <a href="https://www.bilibili.com/video/BV164Gu6fEs1" target="_blank" rel="noopener noreferrer">第 12 章  (下) ：概率论与采样算法（下）</a>
+- <a href="https://www.bilibili.com/video/BV1ksGu6cE7Z/" target="_blank" rel="noopener noreferrer">第 12 章 (上) ：概率论与采样算法（上）</a>
+- <a href="https://www.bilibili.com/video/BV164Gu6fEs1" target="_blank" rel="noopener noreferrer">第 12 章 (下) ：概率论与采样算法（下）</a>
 - <a href="https://www.bilibili.com/video/BV1big36CEfG" target="_blank" rel="noopener noreferrer">第 13 章 ：重要性采样</a>
 - <a href="https://www.bilibili.com/video/BV1QRty6HEqy" target="_blank" rel="noopener noreferrer">第 14 章 ：面光源</a>
-- <a href="https://www.bilibili.com/video/BV1keh96qEqu" target="_blank" rel="noopener noreferrer">第 15 章  (上) ：微表面模型（上）</a>
-- <a href="https://www.bilibili.com/video/BV1SFab6mEX4" target="_blank" rel="noopener noreferrer">第 15 章  (下) ：微表面模型（下）</a>
+- <a href="https://www.bilibili.com/video/BV1keh96qEqu" target="_blank" rel="noopener noreferrer">第 15 章 (上)：微表面模型（上）</a>
+- <a href="https://www.bilibili.com/video/BV1SFab6mEX4" target="_blank" rel="noopener noreferrer">第 15 章 (下)：微表面模型（下）</a>
+- <a href="https://www.bilibili.com/video/BV121H66JERh" target="_blank" rel="noopener noreferrer">第 16 章 (上)：纹理（上）</a>
+- <a href="https://www.bilibili.com/video/BV1KUH66EEtk" target="_blank" rel="noopener noreferrer">第 16 章 (下)：纹理（下）</a>
 
 > 更多章节持续更新中，欢迎关注 UP 主 **发财学长** 的 B 站频道，及时获取最新课程更新。
 
