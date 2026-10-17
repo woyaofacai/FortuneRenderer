@@ -1,0 +1,237 @@
+<Scene>
+	<Camera>
+		<Position>0, 0.64, -2.58</Position>
+		<Target>0, 0.61, 3</Target>
+		<Up>0, 1, 0</Up>
+		<NearZ>0.1</NearZ>
+		<FarZ>1000</FarZ>
+		<Fov>45</Fov>
+	</Camera>
+	
+	<Materials>
+        <Material>
+            <Name>M_Lambert_Red</Name>
+            <Type>Lambert</Type>
+            <Albedo>1.0, 0.3, 0.3</Albedo>
+        </Material>
+        <Material>
+            <Name>M_Lambert_Blue</Name>
+            <Type>Lambert</Type>
+            <Albedo>0.3, 0.3, 1.0</Albedo>
+        </Material>
+        <Material>
+            <Name>M_Lambert_Gray</Name>
+            <Type>Lambert</Type>
+            <Albedo>0.8, 0.8, 0.8</Albedo>
+        </Material>
+		
+		<Material>
+			<Name>M_OrenNayar_Cement</Name>
+			<Type>OrenNayar</Type>
+			<Albedo>0.8, 0.8, 0.8</Albedo>
+			<AlbedoMap>painted_cement_albedo.png</AlbedoMap>
+			<Sigma>0.5</Sigma>
+			<NormalMap>painted_cement_normal.png</NormalMap>
+			<BumpScale>1</BumpScale>
+		</Material>
+		<Material>
+			<Name>M_OrenNayar_Wood</Name>
+			<Type>OrenNayar</Type>
+			<Albedo>1, 1, 1</Albedo>
+			<AlbedoMap>wood_albedo.png</AlbedoMap>
+			<Sigma>0.3</Sigma>
+			<NormalMap>wood_normal.png</NormalMap>
+			<BumpScale>2</BumpScale>
+		</Material>
+		<Material>
+			<Name>M_Glass_Sphere</Name>
+			<Type>DielectricSpecular</Type>
+			<Eta>1.5</Eta>
+			<TransmissionColor>1, 1, 1</TransmissionColor>
+		</Material>
+		<Material>
+			<Name>M_Lambert_Tile</Name>
+			<Type>Lambert</Type>
+			<Albedo>1, 1, 1</Albedo>
+			<AlbedoMap>tile_albedo.png</AlbedoMap>
+			<NormalMap>tile_normal.png</NormalMap>
+			<BumpScale>1</BumpScale>
+		</Material>
+    </Materials>
+
+	<SceneObjects>
+		<!-- Area Light -->
+		<SceneObject>
+			<Transform>
+				<Position>0, 1.499, 0</Position>
+				<Rotation>90, 0, 0</Rotation>
+				<Scale>1</Scale>
+			</Transform>
+			<Material>M_Lambert_Gray</Material>
+			<Primitives>
+				<Triangle>
+					<Vertex>-0.4, -0.3, 0, 0, 1</Vertex>
+					<Vertex>0.4, -0.3, 0, 1, 1</Vertex>
+					<Vertex>0.4, 0.3, 0, 1, 0</Vertex>
+				</Triangle>
+				<Triangle>
+					<Vertex>-0.4, -0.3, 0, 0, 1</Vertex>
+					<Vertex>0.4, 0.3, 0, 1, 0</Vertex>
+					<Vertex>-0.4, 0.3, 0, 0, 0</Vertex>
+				</Triangle>
+			</Primitives>
+			<Emissive>10, 10, 10</Emissive>
+		</SceneObject>
+		
+		<!-- left sphere -->
+		<SceneObject>
+			<Transform>
+				<Position>-0.4, 0.3, 0.3</Position>
+				<Rotation>0, 0, 0</Rotation>
+				<Scale>1</Scale>
+			</Transform>
+			<Material>M_OrenNayar_Cement</Material>
+			<Primitives>
+				<Sphere>
+					<Radius>0.3</Radius>
+				</Sphere>
+			</Primitives>
+		</SceneObject>
+
+		<!-- right sphere -->
+		<SceneObject>
+			<Transform>
+				<Position>0.4, 0.3, -0.3</Position>
+				<Rotation>90, 0, 0</Rotation>
+				<Scale>1</Scale>
+			</Transform>
+			<Material>M_OrenNayar_Wood</Material>
+			<Primitives>
+				<Sphere>
+					<Radius>0.3</Radius>
+				</Sphere>
+			</Primitives>
+		</SceneObject>
+
+		<!-- ground -->
+		<SceneObject>
+			<Transform>
+				<Position>0, 0, 0</Position>
+				<Rotation>-90, 0, 0</Rotation>
+				<Scale>1</Scale>
+			</Transform>
+			<Material>M_Lambert_Tile</Material>
+			<Primitives>
+				<Triangle>
+					<Vertex>-1, -1, 0, 0, 1</Vertex>
+					<Vertex>1, -1, 0, 1, 1</Vertex>
+					<Vertex>1, 1, 0, 1, 0</Vertex>
+				</Triangle>
+				<Triangle>
+					<Vertex>-1, -1, 0, 0, 1</Vertex>
+					<Vertex>1, 1, 0, 1, 0</Vertex>
+					<Vertex>-1, 1, 0, 0, 0</Vertex>
+				</Triangle>
+			</Primitives>
+		</SceneObject>
+
+		<!-- ceiling -->
+		<SceneObject>
+			<Transform>
+				<Position>0, 1.5, 0</Position>
+				<Rotation>90, 0, 0</Rotation>
+				<Scale>1</Scale>
+			</Transform>
+			<Material>M_Lambert_Tile</Material>
+			<Primitives>
+				<Triangle>
+					<Vertex>-1, -1, 0, 0, 1</Vertex>
+					<Vertex>1, -1, 0, 1, 1</Vertex>
+					<Vertex>1, 1, 0, 1, 0</Vertex>
+				</Triangle>
+				<Triangle>
+					<Vertex>-1, -1, 0, 0, 1</Vertex>
+					<Vertex>1, 1, 0, 1, 0</Vertex>
+					<Vertex>-1, 1, 0, 0, 0</Vertex>
+				</Triangle>
+			</Primitives>
+		</SceneObject>
+
+		<!-- left wall -->
+		<SceneObject>
+			<Transform>
+				<Position>-1, 0.75, 0</Position>
+				<Rotation>0, 90, 0</Rotation>
+				<Scale>1</Scale>
+			</Transform>
+			<Material>M_Lambert_Red</Material>
+			<Primitives>
+				<Triangle>
+					<Vertex>-1, -0.75, 0, 0, 1</Vertex>
+					<Vertex>1, -0.75, 0, 1, 1</Vertex>
+					<Vertex>1, 0.75, 0, 1, 0</Vertex>
+				</Triangle>
+				<Triangle>
+					<Vertex>-1, -0.75, 0, 0, 1</Vertex>
+					<Vertex>1, 0.75, 0, 1, 0</Vertex>
+					<Vertex>-1, 0.75, 0, 0, 0</Vertex>
+				</Triangle>
+			</Primitives>
+		</SceneObject>
+
+		<!-- right wall -->
+		<SceneObject>
+			<Transform>
+				<Position>1, 0.75, 0</Position>
+				<Rotation>0, -90, 0</Rotation>
+				<Scale>1</Scale>
+			</Transform>
+			<Material>M_Lambert_Blue</Material>
+			<Primitives>
+				<Triangle>
+					<Vertex>-1, -0.75, 0, 0, 1</Vertex>
+					<Vertex>1, -0.75, 0, 1, 1</Vertex>
+					<Vertex>1, 0.75, 0, 1, 0</Vertex>
+				</Triangle>
+				<Triangle>
+					<Vertex>-1, -0.75, 0, 0, 1</Vertex>
+					<Vertex>1, 0.75, 0, 1, 0</Vertex>
+					<Vertex>-1, 0.75, 0, 0, 0</Vertex>
+				</Triangle>
+			</Primitives>
+		</SceneObject>
+
+        <!-- back wall -->
+		<SceneObject>
+			<Transform>
+				<Position>0, 0.75, 1</Position>
+				<Rotation>180, 0, 0</Rotation>
+				<Scale>1</Scale>
+			</Transform>
+			<Material>M_Lambert_Tile</Material>
+			<Primitives>
+				<Triangle>
+					<Vertex>-1, -0.75, 0, 0, 1</Vertex>
+					<Vertex>1, -0.75, 0, 1, 1</Vertex>
+					<Vertex>1, 0.75, 0, 1, 0</Vertex>
+				</Triangle>
+				<Triangle>
+					<Vertex>-1, -0.75, 0, 0, 1</Vertex>
+					<Vertex>1, 0.75, 0, 1, 0</Vertex>
+					<Vertex>-1, 0.75, 0, 0, 0</Vertex>
+				</Triangle>
+			</Primitives>
+		</SceneObject>
+
+	</SceneObjects>
+	
+	 <Lights>
+		<!-- Point light at the open (front) side of the Cornell box -->
+		<PointLight>
+			<Position>0, 0.75, -0.95</Position>
+			<Intensity>1, 1, 1</Intensity>
+			<Attenuations>1, 0, 0</Attenuations>
+		</PointLight>
+	 </Lights>
+</Scene>
+

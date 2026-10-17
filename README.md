@@ -88,6 +88,7 @@ sudo apt install -y \
 - <a href="https://www.bilibili.com/video/BV1SFab6mEX4" target="_blank" rel="noopener noreferrer">第 15 章 (下)：微表面模型（下）</a>
 - <a href="https://www.bilibili.com/video/BV121H66JERh" target="_blank" rel="noopener noreferrer">第 16 章 (上)：纹理（上）</a>
 - <a href="https://www.bilibili.com/video/BV1KUH66EEtk" target="_blank" rel="noopener noreferrer">第 16 章 (下)：纹理（下）</a>
+- <a href="https://www.bilibili.com/video/BV1c3Jv6HEXQ" target="_blank" rel="noopener noreferrer">第 17 章 ：法线贴图</a>
 
 > 更多章节持续更新中，欢迎关注 UP 主 **发财学长** 的 B 站频道，及时获取最新课程更新。
 
